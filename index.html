@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Average Score Calculator</title>  
+<style>  
+  body {  
+    font-family: Arial, sans-serif;  
+    text-align: center;  
+    padding: 20px;  
+  }  
+    
+  #result {  
+    margin-top: 20px;  
+  }  
+</style>  
+</head>  
+<body>  
+  
+<h1>Average Score Calculator</h1>  
+  
+<p>Do you need help calculating your average score for 4 units?</p>  
+  
+<button onclick="askForHelp()">Calculate Average</button>  
+  
+<div id="result"></div>  
+  
+<script>  
+function askForHelp() {  
+  // Ask the user if they need help  
+  const needsHelp = prompt("Do you need help calculating your average score for 4 units? (yes/no)");  
+  
+  // Check if the user needs help  
+  if (needsHelp.toLowerCase() === "yes") {  
+    // Prompt the user to enter their full name  
+    const fullName = prompt("Please enter your full name:");  
+  
+    // Initialize an array to store the grades  
+    let grades = [];  
+  
+    // Prompt the user to enter grades for each unit  
+    for (let i = 1; i <= 4; i++) {  
+      const grade = prompt(`Please enter your grade for Unit ${i}:`);  
+  
+      // Convert the input to a number and push it into the grades array  
+      const gradeNumber = parseFloat(grade);  
+      if (!isNaN(gradeNumber)) {  
+        grades.push(gradeNumber);  
+      } else {  
+        alert("Invalid input. Please enter a valid number for the grade.");  
+        i--; // Repeat the current iteration if the input is invalid  
+      }  
+    }  
+  
+    // Calculate the total score  
+    const totalScore = grades.reduce((sum, grade) => sum + grade, 0);  
+  
+    // Calculate the average score  
+    const averageScore = grades.length > 0 ? totalScore / grades.length : 0;  
+  
+    // Display the results  
+    const resultDiv = document.getElementById("result");  
+    resultDiv.innerHTML = `  
+      <h2>Results for ${fullName}</h2>  
+      <p>Total Score: ${totalScore}</p>  
+      <p>Average Score: ${averageScore.toFixed(2)}</p>  
+    `;  
+  
+    // Display a thank you message  
+    alert("Thank you for using the program.");  
+  } else {  
+    alert("You did not request help. If you need it in the future, please feel free to ask.");  
+  }  
+}  
+</script>  
+  
+</body>  
+</html>
